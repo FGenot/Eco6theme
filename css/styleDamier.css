@@ -1,0 +1,24 @@
+
+.case{
+  height : 35px;
+  width : 35px;
+  border : 1px solid lightgray;
+  background-color: blanchedalmond;
+  margin: -2px;
+  }
+
+  .imeuble{
+      background-color: brown;
+  }
+
+  .maison{
+    background-color: violet;
+}
+
+.route{
+  background-color: gray;
+}
+
+.arbre{
+  background-color: green;
+}
