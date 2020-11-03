@@ -24,7 +24,8 @@
   <link rel="stylesheet" href="css/styleDamier.css">
   <link href="css/style.css" rel="stylesheet">
 
-  
+  <!-- Fontewesome-->
+  <script src="https://kit.fontawesome.com/e8640ea6c1.js" crossorigin="anonymous"></script>
   <!-- =======================================================
     Template Name: Instant
     Template URL: https://templatemag.com/instant-bootstrap-personal-template/
@@ -78,25 +79,35 @@
           <div class="row"> <!-- Affichage score-->
             <div class="col-md-4">
               <h4>Populations</h4>
-              <p id="scorePopulation">10000</p>
+              <p id="scorePopulation">0</p>
             </div>
             <div class="col-md-4">
               <h4>Pollution</h4>
-              <p id="scorePollution">20%</p>
+              <p id="scorePollution">0%</p>
+            </div>
+            <div class="col-md-4">
+              <h4>Badges</h4>
+              <p id="scorePollution">0</p>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
         <div class="row"> <!-- Affichage boutons-->
-          <div class="col-md-3">
-            <button id="butImeuble" onclick="btImeuble()">Imeuble</button>
+          <div class="col-md-1">
+            <button id="butImeuble" class="fas fa-building fa-2x" onclick="btImeuble()"></button>
           </div>
-          <div class="col-md-3">
-            <button id="butRoute" onclick="btRoute()">route</button>
+          <div class="col-md-1">
+            <button id="butRoute" class="fas fa-road fa-2x" onclick="btRoute()"></button>
           </div>
-          <div class="col-md-3">
-            <button id="butMaison" onclick="btMaison()">maison</button>
+          <div class="col-md-1">
+            <button id="butMaison" class="fas fa-house-user fa-2x" onclick="btMaison()"></button>
           </div>
-          <div class="col-md-3">
-            <button id="butArbre" onclick="btArbre()">Arbre</button>
+          <div class="col-md-1">
+            <button id="butArbre" class="fas fa-tree fa-2x" onclick="btArbre()"></button>
+          </div>
+          <div class="col-md-1">
+            <button id="butSupp" class="fas fa-trash fa-2x" onclick="btSupp()"></button>
           </div>
         </div>
       </div>
