@@ -1,0 +1,30 @@
+body{
+    background-color: #eeeeee;
+}
+.container{
+    width: 85% !important;
+}
+.pointer{
+    cursor: pointer;
+}
+.center-text{
+    text-align: center;
+}
+.no_margin_bottom{
+    margin-bottom: 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.textarea_send {
+    max-height: 72px !important;
+    overflow-y: auto !important;
+    padding-left: 0.5rem;
+    height: 36px;
+    border-bottom: 0 !important;
+    border-radius: 5px !important;
+    background-color: #eceff1 !important;
+    line-height: 36px;
+}
