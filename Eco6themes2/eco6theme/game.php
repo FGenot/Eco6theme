@@ -8,16 +8,21 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/styleDamier.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Fontewesome-->
+    <script src="https://kit.fontawesome.com/e8640ea6c1.js" crossorigin="anonymous"></script>
+    
+
   </head>
   <body>
     <nav class="green">
       <div class="container nav-wrapper">
         <a href="#" class="brand-logo">Eco6Theme</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="">Accueil</a></li>
-          <li><a href="game.php">Game</a></li>
+          <li><a href="index.php">Accueil</a></li>
+          <li><a href="">Game</a></li>
           <li><a href="">Theme 3</a></li>
           <li><a href="">Theme 4</a></li>
           <li><a href="">Theme 5</a></li>
@@ -30,60 +35,46 @@
 
     <section class="container" style="margin-top: 20px;">
       <div class="row">
-          <div class="col l8 card" style="height: 550px; background-image: url('./img/environnement1.gif'); background-size: cover;padding: 0;">
+          <div class="col l8 card" style="height: 640px; background-image: url('./img/environnement1.gif'); background-size: cover;padding: 0;">
+             
               <div style="background-color: rgba(0,0,0,.6); height: inherit; width: 100%; padding: 0 10px;display: flex;/*! align-items: end; */ justify-content: space-between;flex-direction: column;">
                   <div class="row white" style="margin-bottom: 0;padding: 10px;">
-                      <div class="col">
+                    <!--Population -->
+                    <div class="col">
                           <div style="display: flex; align-items: center;">
                               <div class="col" style="padding-right: 0;"><span style="display: flex; align-items: center;"><i class="material-icons" style="margin-right: 5px;">people</i> Population</span></div>
-                              <div class="col"><span class="green-text" style="font-weight: bold;">5000</span></div>
+                              <div class="col"><span class="green-text" id="people" style="font-weight: bold;">0</span></div>
                           </div>
                       </div>
+                      <!--Pollution -->
                       <div class="col">
                           <div style="display: flex; align-items: center;">
                               <div class="col" style="padding-right: 0;"><span style="display: flex; align-items: center;"><i class="material-icons orange-text" style="margin-right: 5px;">warning</i> Pollution</span></div>
-                          </div>
+                              <div class="col"><span class="red-text" id="pollu" style="font-weight: bold;">0%</span></div>
+                            </div>
+                      </div>
+                      <!--Badges -->
+                      <div class="col">
+                          <div style="display: flex; align-items: center;">
+                              <div class="col" style="padding-right: 0;"><span style="display: flex; align-items: center;"><i class="material-icons green-text" style="margin-right: 5px;">badges</i> Badges</span></div>
+                              <div class="col"><span class="grey-text" id="badgesCount" style="font-weight: bold;">30</span></div>
+                            </div>
+                      </div>
+                      <!--Boutons supprimer -->
+                      <div class="col"  style="float: right;">
+                          <div style="display: flex; align-items: center;">
+                                <i class="fas fa-trash fa-2x" onclick="btSupp()"></i>
+                            </div>
                       </div>
                   </div>
-                  <div class="row" style="display: flex; justify-content: center; align-items: center;">
-                        <div class="col">
-                            <span class="white-text bold" style="font-size: 35px;">Ressources présentes dans la ville</span>
-                        </div>
-                  </div>
-                  <div class="row" style="margin-bottom: 0; display: flex; flex-direction: row; overflow-x: scroll;">
-                      <div class="col">
-                          <img class="pointer" src="img/building2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/road2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/building2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/cherry-tree2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/road2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/cherry-tree2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/solar-house2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/road2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/wind-power2.png" style="height: 200px; width: 100px;">
-                      </div>
-                      <div class="col">
-                          <img class="pointer" src="img/road2.png" style="height: 200px; width: 100px;">
-                      </div>
-                  </div>
+                  <!---Content plateau -->
+                  <p id="selectButton" hidden>imeuble</p>
+                  <div id="contentPlateau" class="col-md-6 transparent" style="margin: 0 auto;"></div>
+
+               <!--Fin plateau -->  
               </div>
           </div>
+          
           <div class="col l4">
               <div class="col s12">
                   <div class="card" style="margin-bottom: 0;">
@@ -93,24 +84,30 @@
                       <div class="divider"></div>
                       <div class="card-content" style="padding: 12px !important;">
                           <div class="row no_margin_bottom resources" style="height: 100%; display: none;">
+                          <!-- Arbre-->
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="tree" data-target="modal_add_resource" src="img/cherry-tree2.png" style="height: 60px; width: 60px;">
+                                  <img class="resource pointer modal-trigger" data-res="Arbre" data-target="modal_add_resource" src="img/cherry-tree2.png" style="height: 60px; width: 60px;">
                               </div>
+                              <!-- Imeuble-->
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="building" data-target="modal_add_resource" src="img/building2.png" style="height: 60px; width: 60px;">
+                                  <img class="resource pointer modal-trigger" data-res="Imeuble" data-target="modal_add_resource" src="img/building2.png" style="height: 60px; width: 60px;">
                               </div>
+                              <!-- Route-->
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="road" data-target="modal_add_resource" src="img/road2.png" style="height: 60px; width: 60px;">
+                                  <img class="resource pointer modal-trigger" data-res="Route" data-target="modal_add_resource" src="img/road2.png" style="height: 60px; width: 60px;">
                               </div>
+                              <!-- Maison-->
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="solar_house" data-target="modal_add_resource" src="img/solar-house2.png" style="height: 60px; width: 60px;">
+                                  <img class="resource pointer modal-trigger" data-res="Maison" data-target="modal_add_resource" src="img/solar-house2.png" style="height: 60px; width: 60px;">
                               </div>
+                              <!-- Eolienne
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="wind_power" data-target="modal_add_resource" src="img/wind-power2.png" style="height: 60px; width: 60px;">
-                              </div>
+                                  <img class="resource pointer modal-trigger" data-res="Eolienne" data-target="modal_add_resource" src="img/wind-power2.png" style="height: 60px; width: 60px;">
+                              </div>-->
+                              <!-- Voies Vélos
                               <div class="col">
-                                  <img class="resource pointer modal-trigger" data-res="bike_path" data-target="modal_add_resource" src="img/bike-path.png" style="height: 60px; width: 60px;">
-                              </div>
+                                  <img class="resource pointer modal-trigger" data-res="Voies Vélos" data-target="modal_add_resource" src="img/bike-path.png" style="height: 60px; width: 60px;">
+                              </div>-->
                           </div>
                       </div>
                   </div>
@@ -209,8 +206,10 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/damier.js"></script>
   </body>
 </html>
