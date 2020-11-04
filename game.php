@@ -68,7 +68,7 @@
                       </div>
                   </div>
                   <!---Content plateau -->
-                  <p id="selectButton" hidden>imeuble</p>
+                  <p id="selectButton" hidden>blabla</p>
                   <div id="contentPlateau" class="col-md-6 transparent" style="margin: 0 auto;"></div>
 
                <!--Fin plateau -->  
@@ -79,7 +79,8 @@
               <div class="col s12">
                   <div class="card" style="margin-bottom: 0;">
                       <div class="card-content" style="padding: 12px !important;">
-                          <h6 class="" style="display: flex; align-items: center; margin: 0;">Ressources<i class="material-icons pointer show_resources green-text" style="font-size: 25px;">expand_more</i> </h6>
+                          <h6 class="" style="display: flex; align-items: center; margin: 0;">Ressources<i class="material-icons pointer show_resources green-text" style="font-size: 25px;">expand_more</i> <img src="img/white.png" id="imgSelect" style="height: 20px; width: 20px;"></h6>
+                          
                       </div>
                       <div class="divider"></div>
                       <div class="card-content" style="padding: 12px !important;">
