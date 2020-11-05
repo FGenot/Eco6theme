@@ -14,7 +14,8 @@ if(isset($_POST['username']) && isset($_POST['password']))
     // pour éliminer toute attaque de type injection SQL et XSS
     $email = mysqli_real_escape_string($db,htmlspecialchars($_POST['email'])); 
     $motDePasse = mysqli_real_escape_string($db,htmlspecialchars($_POST['motDePasse']));
-    $motDePasse = sha1($motDePasse);
+    $motDePasse = crypt($motDePasse, "$6$rounds=5000$eco6theme$");
+    
     
     if($email !== "" && $motDePasse !== "")
     {

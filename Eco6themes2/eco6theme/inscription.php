@@ -9,26 +9,26 @@
 
     // Si la variable "$_Post" contient des informations alors on les traitres
     if(!empty($_POST)){
-    	$db_username = 'root';
-    	$db_password = '';
-    	$db_name     = 'eco6';
-    	$db_host     = 'localhost';
-    	$db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
-           	or die('could not connect to database');
+        $db_username = 'root';
+        $db_password = '';
+        $db_name     = 'eco6';
+        $db_host     = 'localhost';
+        $db = mysqli_connect($db_host, $db_username, $db_password,$db_name)
+            or die('could not connect to database');
         extract($_POST);
         $valid = true;
 
         // On se place sur le bon formulaire gr�ce au "name" de la balise "input"
         if (isset($_POST['inscription'])){
 
-        	$pseudo = htmlentities(trim($pseudo));
-            $nom  = htmlentities(trim($nom)); // On r�cup�re le nom
-            $prenom = htmlentities(trim($prenom)); // on r�cup�re le pr�nom
-            $email = htmlentities(strtolower(trim($email))); // On r�cup�re le mail
+            $pseudo = mysqli_real_escape_string(htmlentities(trim($pseudo))(;
+            $nom  = mysqli_real_escape_string(htmlentities(trim($nom))); // On r�cup�re le nom
+            $prenom = mysqli_real_escape_string(htmlentities(trim($prenom))); // on r�cup�re le pr�nom
+            $email = mysqli_real_escape_string(htmlentities(strtolower(trim($email)))); // On r�cup�re le mail
             $motDePasse = trim($motDePasse); // On r�cup�re le mot de passe 
             $confmdp = trim($confmdp); //  On r�cup�re la confirmation du mot de passe
 
-			if(empty($pseudo)){
+            if(empty($pseudo)){
                 $valid = false;
                 $er_pseudo = ("Le pseudo ne peut pas �tre vide");
             }else{
@@ -92,9 +92,8 @@
             // Si toutes les conditions sont remplies alors on fait le traitement
             if($valid){
 
-                $motDePasse = crypt($motDePasse, "$6$rounds=5000$macleapersonnaliseretagardersecret$");
+                $motDePasse = crypt($motDePasse, "$6$rounds=5000$eco6theme$");
 
-                $date_creation_compte = date('Y-m-d H:i:s');
 
                 // On insert nos donn�es dans la table utilisateur
                 $DB->insert("INSERT INTO utilisateur (pseudo, nom, prenom, mail, motDePasse) VALUES 
@@ -109,66 +108,85 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Inscription</title>
-    </head>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>df</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+    <body>
+    <nav class="green">
+      <div class="container nav-wrapper">
+        <a href="#" class="brand-logo">Eco6Theme</a>
+        <a href="Connexion" class="right hide-on-med-and-down">
+      </div>
+    </nav>
+    <section class="container" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col s12">
+                <div class="card" style="margin-bottom: 0;">
+                    <div class="card-content" style="padding: 12px !important;">
+                        <h6 style="display: flex; justify-content: center; align-items: center;">Inscription</h6>   
+                    </div> 
+                    <div style="padding: 12px !important;">
+                        <form method="post">
+                            <?php
+                                // S'il y a une erreur sur le nom alors on affiche
+                                if (isset($er_pseudo)){
+                                ?>
+                                    <div><?= $er_pseudo ?></div>
+                                <?php   
+                                }
+                            ?>
+                            <input type="text" placeholder="Votre pseudo" name="pseudo" value="<?php if(isset($pseudo)){ echo $pseudo; }?>" required>   
+                            <?php
+                                // S'il y a une erreur sur le nom alors on affiche
+                                if (isset($er_nom)){
+                                ?>
+                                    <div><?= $er_nom ?></div>
+                                <?php   
+                                }
+                            ?>
+                            <input type="text" placeholder="Votre nom" name="nom" value="<?php if(isset($nom)){ echo $nom; }?>" required>   
 
-    <body>      
-        <div>Inscription</div>
-        <form method="post">
-            <?php
-                // S'il y a une erreur sur le nom alors on affiche
-                if (isset($er_pseudo)){
-                ?>
-                    <div><?= $er_pseudo ?></div>
-                <?php   
-                }
-            ?>
-            <input type="text" placeholder="Votre pseudo" name="pseudo" value="<?php if(isset($pseudo)){ echo $pseudo; }?>" required>   
-            <?php
-                // S'il y a une erreur sur le nom alors on affiche
-                if (isset($er_nom)){
-                ?>
-                    <div><?= $er_nom ?></div>
-                <?php   
-                }
-            ?>
-            <input type="text" placeholder="Votre nom" name="nom" value="<?php if(isset($nom)){ echo $nom; }?>" required>   
+                            <?php
+                                if (isset($er_prenom)){
+                                ?>
+                                    <div><?= $er_prenom ?></div>
+                                <?php   
+                                }
+                            ?>
+                            <input type="text" placeholder="Votre prénom" name="prenom" value="<?php if(isset($prenom)){ echo $prenom; }?>" required>   
 
-            <?php
-                if (isset($er_prenom)){
-                ?>
-                    <div><?= $er_prenom ?></div>
-                <?php   
-                }
-            ?>
-            <input type="text" placeholder="Votre prénom" name="prenom" value="<?php if(isset($prenom)){ echo $prenom; }?>" required>   
+                            <?php
+                                if (isset($er_email)){
+                                ?>
+                                    <div><?= $er_email ?></div>
+                                <?php   
+                                }
+                            ?>
+                            <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($email)){ echo $email; }?>" required>
 
-            <?php
-                if (isset($er_email)){
-                ?>
-                    <div><?= $er_email ?></div>
-                <?php   
-                }
-            ?>
-            <input type="email" placeholder="Adresse mail" name="mail" value="<?php if(isset($email)){ echo $email; }?>" required>
-
-            <?php
-                if (isset($er_mdp)){
-                ?>
-                    <div><?= $er_mdp ?></div>
-                <?php   
-                }
-            ?>
-            <input type="password" placeholder="Mot de passe" name="mdp" value="<?php if(isset($motDePasse)){ echo $motDePasse; }?>" required>
-            <input type="password" placeholder="Confirmer le mot de passe" name="confmdp" required>
-
-                <button type="submit" name="inscription">Envoyer</button>
-
-        </form>
+                            <?php
+                                if (isset($er_mdp)){
+                                ?>
+                                    <div><?= $er_mdp ?></div>
+                                <?php   
+                                }
+                            ?>
+                            <input type="password" placeholder="Mot de passe" name="mdp" value="<?php if(isset($motDePasse)){ echo $motDePasse; }?>" required>
+                            <input type="password" placeholder="Confirmer le mot de passe" name="confmdp" required>
+                            <button type="submit" name="inscription">Envoyer</button>
+                        </form>                  
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
